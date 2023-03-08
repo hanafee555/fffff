@@ -17,7 +17,7 @@ const connection = mysql.createConnection({
 
 app.get('/User', function (req, res, next) {
     connection.query(
-  'SELECT * FROM User_tb',
+  'SELECT * FROM Users',
   function(err, results, fields) {
     res.json(results);
     
@@ -30,8 +30,8 @@ app.get('/User', function (req, res, next) {
 
 app.post("/create", (req,res) =>{
     connection.query(
-        "INSERT INTO User_tb (fname,lname,gmail,password) VALUES (?,?,?,?)",
-        [req.body.fname,req.body.lname,req.body.gmail,req.body.password],
+        "INSERT INTO `Users`(`Username`, `Email`, `Password`)VALUES (?,?,?)",
+        [req.body.name,req.body.email,req.body.password],
         (err,result)=>{
             if(err){
                 res.json({error: "Error inserting data in to database"});
